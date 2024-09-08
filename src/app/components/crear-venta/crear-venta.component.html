@@ -1,0 +1,69 @@
+<body>
+    <div id="pantalla-dividida">
+        <div class="izquierda">
+            <div class="imgCentro tamImagen">
+            <img 
+            src="../../../assets/imagenes/logo.png" 
+            /> 
+          </div>
+            <h1 class="centrado">Software contable</h1>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="imgCentro">
+            <img src="../../../assets/imagenes/logo2.jfif"/>
+          </div>
+        </div>
+
+        <div class="derecha"> 
+
+
+        <h1>Productos en inventario</h1>
+        <form>
+            Productos:
+            <select>
+                <option>Producto 1</option>
+                <option>Producto 2</option>
+                <option>Producto 3</option>
+                <option>Producto 4</option>
+                <option>Producto 5</option>
+                <option>Producto 6</option>
+            </select>
+        </form>
+    <br><br><br><br>
+
+    <h3>Utilidad</h3>
+    <button type="submit" >5%</button>
+    <button type="submit" >10%</button>
+    <button type="submit" >15%</button>
+    <button type="submit" >20%</button>
+<br><br> 
+<h3 >Cantidad</h3>
+
+<article class="article">
+<section class="counter">
+   
+    <div class="counter_div">
+        <p class="counter_div-p contador" id="number">0</p> <!-- es el parrafo que muestra el numero actual del contador,
+        El id="number" se usa para identificar este elemento en particular cuando queramos modificar su contenido con JS -->
+        <button onclick="disminuye()" class="counter_div-button" id="disminuye">-</button>
+       <!--  botón que, al darle clic, llama a la función disminuye().  -->
+        <button onclick="limpiar()" class="counter_div-button buttonlimpiar" id="limpiar">limpiar</button>
+        <button onclick="incrementa()" class="counter_div-button" id="incrementa">+</button>
+
+    </div>
+</section>
+
+<p><label for="observaciones">Observaciones: <textarea  id="observaciones"></textarea></label></p>
+<br>
+</article>
+<button  class="button button-blue" (click)="crear()">Crear venta</button>
+<br>
+<br>
+<a class="button button-blue" routerLink="/menu">Volver</a>
+
+<script src="js/creaVenta.js"></script>
+</div>
+</div>
+</body>

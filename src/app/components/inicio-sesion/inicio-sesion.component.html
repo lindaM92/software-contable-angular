@@ -1,0 +1,84 @@
+<section id="pantalla-dividida">
+  <div class="izquierda">
+    <div class="imgCentro tamImagen">
+      <img src="../../../assets/imagenes/logo.png" />
+    </div>
+    <h1 class="centrado">Software contable</h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="imgCentro">
+      <img src="./../../assets/imagenes/logo2.jfif" />
+    </div>
+  </div>
+
+  <div class="derecha lineaDivision">
+    <h1>Inicio de sesión</h1>
+    <br />
+    <br />
+    <br />
+
+    <form [formGroup]="loginForm" (ngSubmit)="iniciarSesion()">
+      
+        <label for="usuario"
+          >Usuario:
+          <br />
+          <br />
+          <input
+            class="cajaText"
+            type="text"
+            id="usuario"
+            formControlName="correo"
+        /></label>
+      
+      <br />
+      <br />
+      <p>
+        <label for="clave"
+          >Contraseña:
+          <br />
+          <br />
+          <input
+            class="cajaText"
+            type="text"
+            id="clave"
+            formControlName="contrasena"
+        /></label>
+      </p>
+      <br />
+      <br />
+      <br />
+
+      <input type="radio" value="recordarDatos" />
+      <label>Recordar datos</label>
+
+      <!--Botton para navegar a la ruta menu, por medio del botón iniciar-->
+      <button
+        class="button button-blue espacio-derecha"
+        type="submit"
+        [disabled]="loginForm.invalid"
+      >
+        Iniciar
+      </button>
+
+      <br />
+      <br />
+      <br />
+      <a class="enlace-derecha" (click)="recuperar()">Recuperar contraseña</a>
+      <br />
+      <br />
+      <p class="parrafo">¿No tiene una cuenta?</p>
+      <button class="button button-blue" type="button" routerLink="/registro">
+        Registrar
+      </button>
+    </form>
+  </div>
+  <!-- <div id="myModal" class="modal">
+  <div class="modal-content">
+      <span class="close" id="closeModal">&times;</span>
+      <p id="modalMensaje"></p>
+  </div>
+<script src="js/document.js"></script>
+</div> -->
+</section>

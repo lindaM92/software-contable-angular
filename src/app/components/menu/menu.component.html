@@ -1,0 +1,62 @@
+<div id="pantalla-dividida">
+  <div class="izquierda">
+    <div class="imgCentro tamImagen">
+      <img src="../../../assets/imagenes/logo.png" />
+    </div>
+    <h1 class="centrado">Software contable</h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="imgCentro">
+      <img src="../../../assets/imagenes/logo2.jfif" />
+    </div>
+  </div>
+  <div class="derecha">
+    <br />
+    <h1 class="centrado">Menú</h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="centrado">
+      <a class="button button-menu button-blue" routerLink="/cambiar-contrasena"
+        >Cambiar contraseña</a
+      >
+      <br />
+      <br />
+      <a class="button button-menu button-blue" routerLink="/crear-producto"
+        >Crear producto</a
+      >
+      <br />
+      <br />
+      <a class="button button-menu button-blue" routerLink="/crear-venta"
+        >Crear venta</a
+      >
+      <br />
+      <br />
+      <a class="button button-menu button-blue" routerLink="/detalle-costo"
+        >Detalle costo producto</a
+      >
+      <br />
+      <br />
+      <a class="button button-menu button-blue" routerLink="/detalle-venta"
+        >Detalle venta producto</a
+      >
+      <br />
+      <br />
+      <a class="button button-menu button-blue" routerLink="/reporte"
+        >Generar reporte</a
+      >
+      <br />
+      <br />
+      <a
+        class="button button-menu button-blue"
+        routerLink="/inicio-sesion"
+        (click)="cerrarSesion()"
+        >Salir del aplicativo</a
+      >
+    </div>
+  </div>
+</div>
+<button type="button" (click)="estado()">Estado usuario</button>

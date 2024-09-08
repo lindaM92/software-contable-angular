@@ -1,0 +1,20 @@
+.fondo {
+    background: #E2E5EA; 
+  }
+
+  input {
+    width: 40%;
+    display: flex;
+  }
+  
+  /* Ajusta el fondo de las cajas de texto dentro del formulario */
+.cajaText {
+    background-color: #E2E5EA; /* Color de fondo para las cajas de texto igual al del formulario */
+    border: 1px solid #0f0f0f; /* borde  para mejorar la visibilidad de las cajas de texto */
+  }
+
+  /* PARA DAR ESPACIO ENTRE LOS BOTONES */
+  button{
+     margin-right: 30%; 
+     
+  }

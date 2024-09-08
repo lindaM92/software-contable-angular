@@ -1,0 +1,48 @@
+<body>
+    <section id="pantalla-dividida">
+        <div class="izquierda">
+            <div class="imgCentro tamImagen">
+            <img 
+            src="../../../assets/imagenes/logo.png" 
+            /> 
+          </div>
+            <h1 class="centrado">Software contable</h1>
+            <br>
+            <br>
+            <br>
+            <br>
+            <div class="imgCentro">
+            <img src="../../../assets/imagenes/logo2.jfif"/>
+          </div>
+        </div>
+        <div class="derecha"> 
+
+      <br>      
+    <h1 class="centrado">Por favor seleccione el rango de fecha del cual desea el reporte.</h1> 
+    <br>
+    <br>
+ <br>
+        <!-- mostrar la fecha seleccionada -->
+ <div id="result-container" class="result-container"></div>
+ <br>
+ <br>
+    <div class="date-selector">
+      <label for="start-date">Fecha de inicio:</label>
+      <select id="start-day"></select>
+      <select id="start-month"></select>
+      <select id="start-year"></select>
+
+      <label for="end-date">Fecha de fin:</label>
+      <select id="end-day"></select>
+      <select id="end-month"></select>
+      <select id="end-year"></select>
+  </div>
+  <br>
+  <br>
+  <button id="botonok" class="button button-blue " (click)="recuperar()">OK</button>
+  <a class="button button-blue" routerLink="/menu">Volver</a> 
+</div>
+</section>
+<script src="js/reporte.js"></script>
+
+</body>

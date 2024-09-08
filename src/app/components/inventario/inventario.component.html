@@ -1,0 +1,88 @@
+<body>
+<section id="pantalla-dividida">
+  <div class="izquierda">
+    <div class="imgCentro tamImagen">
+      <img src="../../../assets/imagenes/logo.png" />
+    </div>
+    <h1 class="centrado">Software contable</h1>
+    <br />
+    <br />
+    <br />
+    <br />
+    <div class="imgCentro">
+      <img src="./../../assets/imagenes/logo2.jfif" />
+    </div>
+  </div>
+
+  <div class="derecha lineaDivision">
+    <h1>Inventario</h1>
+    <br />
+    <br />
+    <br /> 
+
+    <form [formGroup]="invForm" (ngSubmit)="inventario()">
+        
+        <label for="nombre"
+        >Nombre:
+        <br />
+        <br />
+        <input
+          class="cajaText"
+          type="text"
+          id="nombre"
+          formControlName="nombre"
+      /></label>
+
+      <label for="codigo"
+          >Codigo:
+          <br />
+          <br />
+          <input
+            class="cajaText"
+            type="text"
+            id="codigo"
+            formControlName="codigo"
+        /></label>
+
+        <label for="costo"
+          >Costo:
+          <br />
+          <br />
+          <input
+            class="cajaText"
+            type="text"
+            id="costo"
+            formControlName="costo"
+        /></label>
+
+        <label for="cantidad"
+          >Cantidad:
+          <br />
+          <br />
+          <input
+            class="cajaText"
+            type="text"
+            id="cantidad"
+            formControlName="cantidad"
+        /></label>
+
+        <label for="observaciones"
+          >Observaciones:
+          <br />
+          <br />
+          <input
+            class="cajaText"
+            type="text"
+            id="observaciones"
+            formControlName="observaciones"
+        /></label>
+
+        <a class="button button-blue" routerLink="/menu">Volver</a>
+        <button class="button button-blue espacio" type="submit">
+            Guardar producto
+          </button>
+
+    </form>
+</div>
+</section>
+</body>

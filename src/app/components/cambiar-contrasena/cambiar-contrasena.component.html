@@ -1,0 +1,44 @@
+<body class="fondo">
+  <form [formGroup]="cambioContrasenaForm" (ngSubmit)="cambioContrasena()">
+    <p>
+      <label for="c anterior"
+        >Digita la contraseña anterior:
+        <br />
+        <br />
+        <input
+          type="text"
+          id="c anterior"
+          class="cajaText"
+          formControlName="contrasenaAnterior"
+      /></label>
+    </p>
+    <br />
+    <p>
+      <label for="c nueva"
+        >Digita la nueva contraseña:
+        <br />
+        <br />
+        <input
+          type="text"
+          id="c nueva"
+          class="cajaText"
+          formControlName="nvaContrasena"
+      /></label>
+    </p>
+    <br />
+    <p>
+      <label for="confirmar"
+        >Confirma la nueva contraseña:
+        <br />
+        <br />
+        <input type="text" id="confirmar" class="cajaText"
+      /></label>
+    </p>
+
+    <br />
+    <br />
+    <a class="button button-blue" routerLink="/menu">Volver</a>
+    <button class="button button-blue" id="botonok" type="submit" >OK</button>
+    
+  </form>
+</body>

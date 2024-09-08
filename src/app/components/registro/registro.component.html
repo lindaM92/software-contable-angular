@@ -1,0 +1,57 @@
+<div class="fondo">
+  <form [formGroup]="registroForm" (ngSubmit)="registrarUsuario()">
+    <label for="nombre">Nombre: </label>
+    <input type="text" id="nombre" formControlName="nombre" />
+
+    <br />
+
+    <label for="apellido"
+      >Apellido: <input type="email" id="apellido" formControlName="apellido"
+    /></label>
+
+    <br />
+
+    <label for="contacto"
+      >Contacto: <input type="text" id="contacto" formControlName="contacto"
+    /></label>
+
+    <br />
+
+    <label for="fecha nacimiento"
+      >Fecha nacimiento:
+      <input type="date" id="fecha nacimiento" formControlName="nacimiento"
+    /></label>
+
+    <br />
+
+    <label for="correo"
+      >Correo: <input type="text" id="correo" formControlName="correo"
+    /></label>
+    <br />
+
+    <label for="clave"
+      >Contraseña: <input type="text" id="clave" formControlName="contrasena"
+    /></label>
+
+    <br />
+
+    <label for="confirma clave"
+      >Confirmar contraseña:
+      <input
+        type="text"
+        id="confirma clave"
+        formControlName="confirmarContrasena"
+    /></label>
+
+    <br />
+    <br />
+    <button class="button button-blue" id="registrar" type="submit">
+      Registrar
+    </button>
+
+    <a class="button button-blue" routerLink="/inicio-sesion">Volver</a>
+    <p class="error" *ngIf="validarFormulario()">
+      Verifique que todos los campos se encuentren diligenciados correctamente
+    </p>
+  </form>
+</div>

@@ -1,0 +1,27 @@
+.date-selector {
+    background-color: #E2E5EA;
+    padding: 3%;
+    border-radius: 5%;
+    width: 50%;
+}
+
+label {
+    display: block;
+    margin-bottom: 2%;
+}
+
+select {
+    
+    margin-bottom: 2%;
+    padding: 1%;
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #E2E5EA;
+    border: 1px solid #0f0f0f; 
+}
+
+label{
+    font-weight: bold;
+}
+
+

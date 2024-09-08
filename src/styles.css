@@ -1,1 +1,74 @@
 /* You can add global styles to this file, and also import other style files */
+/* ESTO LO TIENEN TODOS LOS HTML */
+
+/* Estilo base del botón */
+.button {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 25px; /* Esto hace que los bordes sean redondos */
+    color: #0f0f0f; /* Color del texto */
+    font-weight: bold;
+    cursor: pointer;
+  }
+  
+  /* Estilo para el fondo del botón */
+  .button-blue {
+    background-color: #69A8C9; /* Color azul especificado */
+    border: 2px solid #69A8C9; /* Borde del mismo color para destacar */
+  }
+  
+  /* Estilo cuando el mouse está sobre el botón */
+  .button:hover {
+    background-color: #40749e; /* Cambiar el color al pasar el mouse */
+    border-color: #40749e; /* Cambiar el color del borde al pasar el mouse */
+  }
+  
+   /* Estilo para los titulos */
+   h1 {
+    font-weight: bold;
+    color: #0f0f0f;
+  }
+  
+  /* Estilo para centrar los titulos */
+  
+  .centrado {
+    text-align: center;
+    margin: 0; /* Esto elimina cualquier margen predeterminado que pueda tener el h1 */
+   
+  }
+  
+  /* esto es para hacer la pantalla dividida */
+  
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .izquierda {
+    background: #E2E5EA;
+    height: 100vh;  /* vh es para que ocupe todo el ancho de la pagina asi se agrande o se achique */
+    width: 50%;
+  }
+  
+  .derecha {
+  width: 50%;
+  }
+  
+  #pantalla-dividida {
+    display: flex;
+  }
+  
+  
+  /* para centrar la imagen y darle espacio hacia abajo sin br*/
+  .imgCentro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5%;
+    margin-top: 5%;
+    
+  }
+    
