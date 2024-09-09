@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { IProducto } from '../../models/producto.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import Swal from 'sweetalert2';
+import { IInventario } from '../../models/inventario.model';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,35 @@ export class VentasService {
     this.angularFireStore
       .collection('productos')
       .add(producto)
-      .then((response) => {
+      .then(() => {
+        const date = new Date(); // Fecha actual
+        const formattedDate = date.toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+        });
+
+        this.AgregarProdInventario({
+          ...producto,
+          costo: null,
+          cantidad: 0,
+          fechaCreacion: formattedDate,
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un error en el servidor',
+          text: error,
+        });
+      });
+  }
+
+  AgregarProdInventario(prodInventario: IInventario): void {
+    this.angularFireStore
+      .collection('inventario')
+      .add(prodInventario)
+      .then(() => {
         Swal.fire({
           title: 'BIEN',
           text: 'Producto creado satisfactoriamente',
@@ -27,5 +57,13 @@ export class VentasService {
           text: error,
         });
       });
+  }
+
+  //trayendo la información de todos los productos existentes en el inventario
+
+  obtenerInventario(): Observable<any> {
+    return this.angularFireStore
+      .collection<IInventario>('inventario')
+      .snapshotChanges();
   }
 }

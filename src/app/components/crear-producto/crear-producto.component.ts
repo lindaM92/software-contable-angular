@@ -28,13 +28,19 @@ export class CrearProductoComponent implements OnInit {
 
   //llamando la función registroProducto() que se encuentra en el servicio ventasService
   //Se le envían los valores del formulario
-  crearProducto () : void {
-    this.ventasService.registroProducto(this.createProductForm.value)
-  } 
-
-  
+  crearProducto(): void {
+    this.ventasService.registroProducto(this.createProductForm.value);
+  }
 
   private _iniciarFormulario(): void {
+    this.createProductForm = this.fb.group({
+      nombre: [null, [Validators.required]],
+      codigo: [null, [Validators.required]],
+      observaciones: [null],
+    });
+  }
+
+  /*   private _iniciarFormulario(): void {
     this.createProductForm = this.fb.group({
       nombre: [null, [Validators.required]],
       uniMedida: [null, [Validators.required]],
@@ -43,5 +49,5 @@ export class CrearProductoComponent implements OnInit {
       cantidad: [null, [Validators.required]],
       observaciones: [null],
     });
-  }
+  } */
 }

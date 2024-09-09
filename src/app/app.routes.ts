@@ -8,6 +8,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { RegistroComponent } from './components/registro/registro.component';
 import { ReporteComponent } from './components/reporte/reporte.component';
 import { CambiarContrasenaComponent } from './components/cambiar-contrasena/cambiar-contrasena.component';
+import { InventarioComponent } from './components/inventario/inventario.component';
 
 //Configuración de rutas
 export const routes: Routes = [
@@ -78,9 +79,16 @@ export const routes: Routes = [
   {
     path: 'registro',
     loadComponent: () =>
-      import(
-        './components/registro/registro.component'
-      ).then((c) => RegistroComponent),
+      import('./components/registro/registro.component').then(
+        (c) => RegistroComponent
+      ),
+  },
+  {
+    path: 'inventario',
+    loadComponent: () =>
+      import('./components/inventario/inventario.component').then(
+        (c) => InventarioComponent
+      ),
   },
 
   //ruta para que por defecto me lleve a inicio de sesion
