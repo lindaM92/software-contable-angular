@@ -1,69 +1,88 @@
 <body>
-    <div id="pantalla-dividida">
-        <div class="izquierda">
-            <div class="imgCentro tamImagen">
-            <img 
-            src="../../../assets/imagenes/logo.png" 
-            /> 
-          </div>
-            <h1 class="centrado">Software contable</h1>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="imgCentro">
-            <img src="../../../assets/imagenes/logo2.jfif"/>
-          </div>
-        </div>
-
-        <div class="derecha"> 
-
-
-        <h1>Productos en inventario</h1>
-        <form>
-            Productos:
-            <select>
-                <option>Producto 1</option>
-                <option>Producto 2</option>
-                <option>Producto 3</option>
-                <option>Producto 4</option>
-                <option>Producto 5</option>
-                <option>Producto 6</option>
-            </select>
-        </form>
-    <br><br><br><br>
-
-    <h3>Utilidad</h3>
-    <button type="submit" >5%</button>
-    <button type="submit" >10%</button>
-    <button type="submit" >15%</button>
-    <button type="submit" >20%</button>
-<br><br> 
-<h3 >Cantidad</h3>
-
-<article class="article">
-<section class="counter">
-   
-    <div class="counter_div">
-        <p class="counter_div-p contador" id="number">0</p> <!-- es el parrafo que muestra el numero actual del contador,
-        El id="number" se usa para identificar este elemento en particular cuando queramos modificar su contenido con JS -->
-        <button onclick="disminuye()" class="counter_div-button" id="disminuye">-</button>
-       <!--  botón que, al darle clic, llama a la función disminuye().  -->
-        <button onclick="limpiar()" class="counter_div-button buttonlimpiar" id="limpiar">limpiar</button>
-        <button onclick="incrementa()" class="counter_div-button" id="incrementa">+</button>
-
+  <div id="pantalla-dividida">
+    <div class="izquierda">
+      <div class="imgCentro tamImagen">
+        <img src="../../../assets/imagenes/logo.png" />
+      </div>
+      <h1 class="centrado">Software contable</h1>
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="imgCentro">
+        <img src="../../../assets/imagenes/logo2.jfif" />
+      </div>
     </div>
-</section>
 
-<p><label for="observaciones">Observaciones: <textarea  id="observaciones"></textarea></label></p>
-<br>
-</article>
-<button  class="button button-blue" (click)="crear()">Crear venta</button>
-<br>
-<br>
-<a class="button button-blue" routerLink="/menu">Volver</a>
+    <div class="derecha">
+      <h1>Creación de venta</h1>
 
-<script src="js/creaVenta.js"></script>
-</div>
-</div>
+      Productos:
+      <label for="categoria">Selecciona un producto:</label>
+      <select
+        id="categoria"
+        [(ngModel)]="productoSeleccionado"
+        (change)="verProductoSeleccionado()"
+      >
+        <option *ngFor="let producto of inventarioData" [ngValue]="producto">
+          {{ producto?.nombre }}
+        </option>
+      </select>
+      <br /><br /><br /><br />
+
+      <h3>Utilidad</h3>
+      <button (click)="calcularPrecioV(5)">5%</button>
+      <button (click)="calcularPrecioV(10)">10%</button>
+      <button (click)="calcularPrecioV(15)">15%</button>
+      <button (click)="calcularPrecioV(20)">20%</button>
+      <br /><br />
+      <h3>Precio de venta</h3>
+      <h3>{{ precioVenta }}</h3>
+      <h3>Cantidad</h3>
+
+      <article class="article">
+        <section class="counter">
+          <div class="counter_div">
+            <p class="counter_div-p contador" id="number">{{cantidad}}</p>
+            <!-- es el parrafo que muestra el numero actual del contador,
+        El id="number" se usa para identificar este elemento en particular cuando queramos modificar su contenido con JS -->
+            <button
+              (click)="disminuirCantidad()"
+              class="counter_div-button"
+              id="disminuye"
+            >
+              -
+            </button>
+            <!--  botón que, al darle clic, llama a la función disminuye().  -->
+            <button
+              (click)="limpiarCantidad()"
+              class="counter_div-button buttonlimpiar"
+              id="limpiar"
+            >
+              limpiar
+            </button>
+            <button
+              (click)="aumentarCantidad()"
+              class="counter_div-button"
+              id="incrementa"
+            >
+              +
+            </button>
+          </div>
+        </section>
+        <form [formGroup]="ventaForm">
+          <p>
+            <label for="observaciones"
+              >Observaciones: <textarea id="observaciones"></textarea>
+            </label>
+          </p>
+          <br />
+          <button class="button button-blue">Crear venta</button>
+        </form>
+      </article>
+      <br />
+      <br />
+      <a class="button button-blue" routerLink="/menu">Volver</a>
+    </div>
+  </div>
 </body>

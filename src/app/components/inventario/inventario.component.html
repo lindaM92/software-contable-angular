@@ -24,20 +24,17 @@
       <select
         id="categoria"
         [(ngModel)]="productoSeleccionado"
-        (change)="seleccionarProducto($event)"
+        (change)="seleccionarProducto()"
       >
-        <option
-          *ngFor="let producto of inventarioData"
-          [ngValue]="producto"
-        >
+        <option *ngFor="let producto of inventarioData" [ngValue]="producto">
           {{ producto?.nombre }}
         </option>
       </select>
-      <br>
-      <br>
-      <br>
+      <br />
+      <br />
+      <br />
 
-      <form [formGroup]="invForm" (ngSubmit)="inventario()">
+      <form [formGroup]="invForm" (ngSubmit)="actualizarInventario()">
         <label for="nombre"
           >Nombre:
           <input
@@ -90,9 +87,7 @@
         <br />
         <br />
         <a class="button button-blue" routerLink="/menu">Volver</a>
-        <button class="button button-blue" type="submit">
-          Guardar producto
-        </button>
+        <button class="button button-blue" type="submit">Guardar</button>
       </form>
     </div>
   </section>

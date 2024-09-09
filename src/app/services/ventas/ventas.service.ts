@@ -2,7 +2,10 @@ import { Injectable } from '@angular/core';
 import { IProducto } from '../../models/producto.model';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import Swal from 'sweetalert2';
-import { IInventario } from '../../models/inventario.model';
+import {
+  IInventario,
+  IInventarioResponse,
+} from '../../models/inventario.model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -65,5 +68,28 @@ export class VentasService {
     return this.angularFireStore
       .collection<IInventario>('inventario')
       .snapshotChanges();
+  }
+
+  actualizarProducto(producto: IInventarioResponse): void {
+    const { id, ...productoMap } = producto;
+
+    this.angularFireStore
+      .collection('inventario')
+      .doc(producto.id)
+      .update(productoMap)
+      .then(() => {
+        Swal.fire({
+          title: 'Actualizado',
+          text: 'Producto actualizado satisfactoriamente',
+          icon: 'success',
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al actualizar',
+          text: error.message,
+        });
+      });
   }
 }

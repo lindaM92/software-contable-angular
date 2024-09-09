@@ -2,7 +2,6 @@ import { Routes } from '@angular/router';
 import { InicioSesionComponent } from './components/inicio-sesion/inicio-sesion.component';
 import { CrearProductoComponent } from './components/crear-producto/crear-producto.component';
 import { CrearVentaComponent } from './components/crear-venta/crear-venta.component';
-import { DetalleCostoComponent } from './components/detalle-costo/detalle-costo.component';
 import { DetalleVentaComponent } from './components/detalle-venta/detalle-venta.component';
 import { MenuComponent } from './components/menu/menu.component';
 import { RegistroComponent } from './components/registro/registro.component';
@@ -31,13 +30,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./components/crear-venta/crear-venta.component').then(
         (c) => CrearVentaComponent
-      ),
-  },
-  {
-    path: 'detalle-costo',
-    loadComponent: () =>
-      import('./components/detalle-costo/detalle-costo.component').then(
-        (c) => DetalleCostoComponent
       ),
   },
   {

@@ -24,9 +24,10 @@ import { CommonModule } from '@angular/common';
   templateUrl: './inventario.component.html',
   styleUrl: './inventario.component.css',
 })
-export class InventarioComponent implements OnInit {
+export class InventarioComponent implements OnInit, OnDestroy {
   invForm!: FormGroup;
   inventarioData!: IInventarioResponse[];
+  inventarioSubs!: Subscription;
   productoSeleccionado!: IInventarioResponse;
 
   constructor(private fb: FormBuilder, private ventasService: VentasService) {}
@@ -34,25 +35,29 @@ export class InventarioComponent implements OnInit {
   ngOnInit(): void {
     this._iniciarFormulario();
 
-    this.ventasService.obtenerInventario().subscribe((valor) => {
-      this.inventarioData = valor.map((valor: any) => {
-        console.log('data sin filtrar ', valor); // Muestra toda la acción con payload, doc, y data()
-        const documentData = valor.payload.doc.data() as IInventario; // Extrae los datos
-        const id = valor.payload.doc.id; // Extrae el ID del documento
-        return { id, ...documentData }; // Combina ID y datos del documento
+    this.inventarioSubs = this.ventasService
+      .obtenerInventario()
+      .subscribe((valor) => {
+        this.inventarioData = valor.map((valor: any) => {
+          const documentData = valor.payload.doc.data() as IInventario; // Extrae los datos
+          const id = valor.payload.doc.id; // Extrae el ID del documento
+          return { id, ...documentData }; // Combina ID y datos del documento
+        });
       });
+  }
 
-      console.log('valor inventario', this.inventarioData);
+  ngOnDestroy(): void {
+    this.inventarioSubs.unsubscribe();
+  }
+
+  actualizarInventario(): void {
+    this.ventasService.actualizarProducto({
+      id: this.productoSeleccionado.id,
+      ...this.invForm.value,
     });
   }
 
-  //llamando la función registroProducto() que se encuentra en el servicio ventasService
-  //Se le envían los valores del formulario
-  inventario(): void {
-    this.ventasService.registroProducto(this.invForm.value);
-  }
-
-  seleccionarProducto(producto: Event): void {
+  seleccionarProducto(): void {
     const { nombre, codigo, costo, cantidad, fechaCreacion, observaciones } =
       this.productoSeleccionado;
 
