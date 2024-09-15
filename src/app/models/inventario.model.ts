@@ -2,7 +2,7 @@ export interface IInventario {
   nombre: string;
   codigo: string;
   costo: string | null;
-  cantidad: 0;
+  cantidad: number;
   fechaCreacion: string;
   observaciones: string | null;
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import {
@@ -23,13 +23,16 @@ import { CommonModule } from '@angular/common';
   templateUrl: './crear-venta.component.html',
   styleUrl: './crear-venta.component.css',
 })
-export class CrearVentaComponent {
+export class CrearVentaComponent implements OnInit, OnDestroy {
   precioVenta: number = 0;
+  totalVenta: number = 0;
   productoSeleccionado!: IInventarioResponse;
   inventarioData!: IInventarioResponse[];
   inventarioSubs!: Subscription;
   ventaForm!: FormGroup;
-  cantidad: number = 0;
+  cantidad: number = 1;
+  disabledButtons: boolean = true;
+  disabledSubmit: boolean = true;
 
   constructor(private fb: FormBuilder, private ventasService: VentasService) {}
 
@@ -47,15 +50,26 @@ export class CrearVentaComponent {
       });
   }
 
+  ngOnDestroy(): void {
+    this.inventarioSubs.unsubscribe();
+  }
+
   calcularPrecioV(utilidad: number): void {
     const costo = Number(this.productoSeleccionado.costo);
 
     const procentajeProd = (costo * utilidad) / 100;
     this.precioVenta = costo + procentajeProd;
+
+    this._calcularTotal();
   }
 
-  verProductoSeleccionado(): void {
-    console.log('producto seleccionado', this.productoSeleccionado);
+  seleccionarProducto(): void {
+    console.log("producto seleccionado", this.productoSeleccionado);
+    
+    this.precioVenta = 0;
+    if (this.disabledButtons === true) {
+      this.disabledButtons = false;
+    }
   }
 
   actualizarInventario(): void {
@@ -69,23 +83,40 @@ export class CrearVentaComponent {
     console.log('aumentar');
 
     this.cantidad++;
+    this._calcularTotal();
   }
 
   disminuirCantidad(): void {
-    if (this.cantidad <= 0) {
-      this.cantidad = 0;
+    if (this.cantidad <= 1) {
+      this.cantidad = 1;
     } else {
       this.cantidad--;
     }
+
+    this._calcularTotal();
   }
 
   limpiarCantidad(): void {
-    this.cantidad = 0;
+    this.cantidad = 1;
+    this._calcularTotal();
   }
 
+  crearVenta(): void {
+    const currentProductUnits = Number(this.productoSeleccionado.cantidad);
+    const newProductUnits = currentProductUnits - this.cantidad;
+    this.ventasService.actualizarProducto({
+      ...this.productoSeleccionado,
+      cantidad: newProductUnits,
+      observaciones: this.ventaForm.value.observaciones,
+    });
+  }
   private _iniciarFormulario(): void {
     this.ventaForm = this.fb.group({
       observaciones: [null],
     });
+  }
+
+  private _calcularTotal(): void {
+    this.totalVenta = this.precioVenta * this.cantidad;
   }
 }

@@ -25,6 +25,12 @@
     background-color: #40749e; /* Cambiar el color al pasar el mouse */
     border-color: #40749e; /* Cambiar el color del borde al pasar el mouse */
   }
+
+  .disabled {
+    background-color: gray;
+    pointer-events: none;
+    border: none;
+  }
   
    /* Estilo para los titulos */
    h1 {

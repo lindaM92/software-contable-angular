@@ -16,34 +16,42 @@
 
     <div class="derecha">
       <h1>Creación de venta</h1>
-
-      Productos:
       <label for="categoria">Selecciona un producto:</label>
       <select
         id="categoria"
         [(ngModel)]="productoSeleccionado"
-        (change)="verProductoSeleccionado()"
+        (change)="seleccionarProducto()"
       >
         <option *ngFor="let producto of inventarioData" [ngValue]="producto">
           {{ producto?.nombre }}
+          {{ producto?.costo | currency : "COP" : "symbol" : "1.0-0" }}
+          <!-- la separación de miles y sin decimale -->
         </option>
       </select>
       <br /><br /><br /><br />
 
       <h3>Utilidad</h3>
-      <button (click)="calcularPrecioV(5)">5%</button>
-      <button (click)="calcularPrecioV(10)">10%</button>
-      <button (click)="calcularPrecioV(15)">15%</button>
-      <button (click)="calcularPrecioV(20)">20%</button>
+      <button (click)="calcularPrecioV(5)" [disabled]="disabledButtons">
+        5%
+      </button>
+      <button (click)="calcularPrecioV(10)" [disabled]="disabledButtons">
+        10%
+      </button>
+      <button (click)="calcularPrecioV(15)" [disabled]="disabledButtons">
+        15%
+      </button>
+      <button (click)="calcularPrecioV(20)" [disabled]="disabledButtons">
+        20%
+      </button>
       <br /><br />
       <h3>Precio de venta</h3>
-      <h3>{{ precioVenta }}</h3>
+      <h3>{{ precioVenta | currency : "COP" : "symbol" : "1.0-0" }}</h3>
       <h3>Cantidad</h3>
 
       <article class="article">
         <section class="counter">
           <div class="counter_div">
-            <p class="counter_div-p contador" id="number">{{cantidad}}</p>
+            <p class="counter_div-p contador" id="number">{{ cantidad }}</p>
             <!-- es el parrafo que muestra el numero actual del contador,
         El id="number" se usa para identificar este elemento en particular cuando queramos modificar su contenido con JS -->
             <button
@@ -58,6 +66,7 @@
               (click)="limpiarCantidad()"
               class="counter_div-button buttonlimpiar"
               id="limpiar"
+              [disabled]="disabledButtons"
             >
               limpiar
             </button>
@@ -69,15 +78,27 @@
               +
             </button>
           </div>
+          <h3>Total venta</h3>
+          <h3>{{ totalVenta | currency : "COP" : "symbol" : "1.0-0" }}</h3>
         </section>
         <form [formGroup]="ventaForm">
           <p>
             <label for="observaciones"
-              >Observaciones: <textarea id="observaciones"></textarea>
+              >Observaciones:
+              <textarea
+                id="observaciones"
+                formControlName="observaciones"
+              ></textarea>
             </label>
           </p>
           <br />
-          <button class="button button-blue">Crear venta</button>
+          <button
+            class="button button-blue"
+            [class.disabled]="totalVenta <= 0"
+            (click)="crearVenta()"
+          >
+            Crear venta
+          </button>
         </form>
       </article>
       <br />
