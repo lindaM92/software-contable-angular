@@ -15,6 +15,7 @@ import {
 import { VentasService } from '../../services/ventas/ventas.service';
 import { Subscription } from 'rxjs';
 import { CommonModule } from '@angular/common';
+import { IVenta } from '../../models/venta.model';
 
 @Component({
   selector: 'app-crear-venta',
@@ -64,19 +65,12 @@ export class CrearVentaComponent implements OnInit, OnDestroy {
   }
 
   seleccionarProducto(): void {
-    console.log("producto seleccionado", this.productoSeleccionado);
-    
+    console.log('producto seleccionado', this.productoSeleccionado);
+
     this.precioVenta = 0;
     if (this.disabledButtons === true) {
       this.disabledButtons = false;
     }
-  }
-
-  actualizarInventario(): void {
-    this.ventasService.actualizarProducto({
-      id: this.productoSeleccionado.id,
-      ...this.ventaForm.value,
-    });
   }
 
   aumentarCantidad(): void {
@@ -104,11 +98,54 @@ export class CrearVentaComponent implements OnInit, OnDestroy {
   crearVenta(): void {
     const currentProductUnits = Number(this.productoSeleccionado.cantidad);
     const newProductUnits = currentProductUnits - this.cantidad;
-    this.ventasService.actualizarProducto({
-      ...this.productoSeleccionado,
-      cantidad: newProductUnits,
-      observaciones: this.ventaForm.value.observaciones,
+
+    const date = new Date(); // Fecha actual
+    const formattedDate = date.toLocaleDateString('es-ES', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
     });
+
+    const dataVenta: IVenta = {
+      nombreProducto: this.productoSeleccionado.nombre,
+      codigoProducto: this.productoSeleccionado.codigo,
+      cantidad: this.cantidad,
+      precioVenta: this.precioVenta,
+      totalVenta: this.totalVenta,
+      observaciones: this.ventaForm.value.observaciones,
+    };
+
+    this.ventasService
+      .registroVenta(dataVenta)
+      .then(() => {
+        this.ventasService
+          .actualizarProducto({
+            ...this.productoSeleccionado,
+            cantidad: newProductUnits,
+            observaciones: this.ventaForm.value.observaciones,
+          })
+          .then(() => {
+            Swal.fire({
+              title: 'BIEN',
+              text: 'Venta creada con exito',
+              icon: 'success',
+            });
+          })
+          .catch((error) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Ocurrio un error en el servidor',
+              text: error,
+            });
+          });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ocurrio un error en el servidor',
+          text: error,
+        });
+      });
   }
   private _iniciarFormulario(): void {
     this.ventaForm = this.fb.group({

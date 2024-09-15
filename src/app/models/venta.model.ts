@@ -1,5 +1,8 @@
 export interface IVenta {
-    nombre: string;
-    codigo: string;
-
+  nombreProducto: string;
+  codigoProducto: string;
+  cantidad: number;
+  precioVenta: number;
+  totalVenta: number;
+  observaciones: string;
 }

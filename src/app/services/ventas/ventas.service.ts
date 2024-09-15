@@ -7,6 +7,7 @@ import {
   IInventarioResponse,
 } from '../../models/inventario.model';
 import { Observable } from 'rxjs';
+import { IVenta } from '../../models/venta.model';
 
 @Injectable({
   providedIn: 'root',
@@ -42,6 +43,12 @@ export class VentasService {
       });
   }
 
+  registroVenta(dataVenta: IVenta): Promise<any> {
+    return this.angularFireStore
+      .collection('ventas')
+      .add(dataVenta);
+  }
+
   AgregarProdInventario(prodInventario: IInventario): void {
     this.angularFireStore
       .collection('inventario')
@@ -70,26 +77,12 @@ export class VentasService {
       .snapshotChanges();
   }
 
-  actualizarProducto(producto: IInventarioResponse): void {
+  actualizarProducto(producto: IInventarioResponse): Promise<any> {
     const { id, ...productoMap } = producto;
 
-    this.angularFireStore
+    return this.angularFireStore
       .collection('inventario')
       .doc(producto.id)
-      .update(productoMap)
-      .then(() => {
-        Swal.fire({
-          title: 'Actualizado',
-          text: 'Producto actualizado satisfactoriamente',
-          icon: 'success',
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error al actualizar',
-          text: error.message,
-        });
-      });
+      .update(productoMap);
   }
 }

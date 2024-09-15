@@ -51,10 +51,25 @@ export class InventarioComponent implements OnInit, OnDestroy {
   }
 
   actualizarInventario(): void {
-    this.ventasService.actualizarProducto({
-      id: this.productoSeleccionado.id,
-      ...this.invForm.value,
-    });
+    this.ventasService
+      .actualizarProducto({
+        id: this.productoSeleccionado.id,
+        ...this.invForm.value,
+      })
+      .then(() => {
+        Swal.fire({
+          title: 'Actualizado',
+          text: 'Producto actualizado satisfactoriamente',
+          icon: 'success',
+        });
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error al actualizar',
+          text: error.message,
+        });
+      });
   }
 
   seleccionarProducto(): void {
