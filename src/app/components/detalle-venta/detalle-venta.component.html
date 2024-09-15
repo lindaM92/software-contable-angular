@@ -1,52 +1,50 @@
 <body>
-    <section id="pantalla-dividida">
-        <div class="izquierda">
-            <div class="imgCentro tamImagen">
-            <img 
-            src="../../../assets/imagenes/logo.png" 
-            /> 
-          </div>
-            <h1 class="centrado">Software contable</h1>
-            <br>
-            <br>
-            <br>
-            <br>
-            <div class="imgCentro">
-            <img src="../../../assets/imagenes/logo2.jfif"/>
-          </div>
+  <section id="pantalla-dividida">
+    <div class="izquierda">
+      <div class="imgCentro tamImagen">
+        <img src="../../../assets/imagenes/logo.png" />
+      </div>
+      <h1 class="centrado">Software contable</h1>
+      <br />
+      <br />
+      <br />
+      <br />
+      <div class="imgCentro">
+        <img src="../../../assets/imagenes/logo2.jfif" />
+      </div>
+    </div>
+
+    <div class="derecha">
+      <h1>Detalle de venta</h1>
+      <br />
+      <br />
+
+      Ventas:
+      <select [(ngModel)]="ventaSeleccionada" (change)="seleccionarVenta()">
+        <option *ngFor="let venta of ventasData" [ngValue]="venta">
+          {{ venta.id }}
+        </option>
+      </select>
+      <br />
+      <br />
+      <br />
+      <br />
+      <h1>Información de la venta</h1>
+      <div *ngIf="ventaSeleccionada">
+        <div><b>Producto:</b> {{ ventaSeleccionada.nombreProducto }}</div>
+        <div><b>Fecha de la venta:</b> {{ ventaSeleccionada.fechaVenta }}</div>
+        <div>
+          <b>codigo producto:</b> {{ ventaSeleccionada.codigoProducto }}
         </div>
+        <div><b>cantidad:</b> {{ ventaSeleccionada.cantidad }}</div>
+        <div><b>totalVenta:</b> {{ ventaSeleccionada.totalVenta }}</div>
+        <div><b>Observaciones:</b> {{ ventaSeleccionada.observaciones }}</div>
+      </div>
 
-
-
-
-        <div class="derecha"> 
-            <h1>Visualización del precio de venta del producto  </h1>
-            <br> <br>
-             
-            <form>
-                Productos:
-                <select>
-                    <option>Producto 1</option>
-                    <option>Producto 2</option>
-                    <option>Producto 3</option>
-                    <option>Producto 4</option>
-                    <option>Producto 5</option>
-                    <option>Producto 6</option>
-                </select>
-            </form>
-            <br> <br> <br> <br> <br> 
-            <h1>Utilidad  </h1>
-            <button type="submit" >5%</button>
-            <button type="submit" >10%</button>
-            <button type="submit" >15%</button>
-            <button type="submit" >20%</button>
-            <br> <br> <br> <br> 
-            <h1>Información del producto</h1>
-            <textarea></textarea>
-            <br> <br>
-            <a class="button button-blue" routerLink="/menu">Salir</a>
-            
-        </div>
-
-    </section>
+      <div></div>
+      <br />
+      <br />
+      <a class="button button-blue" routerLink="/menu">Salir</a>
+    </div>
+  </section>
 </body>

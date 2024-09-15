@@ -5,4 +5,9 @@ export interface IVenta {
   precioVenta: number;
   totalVenta: number;
   observaciones: string;
+  fechaVenta: string;
+}
+
+export interface IVentaResponse extends IVenta {
+  id: string;
 }

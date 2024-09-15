@@ -113,6 +113,7 @@ export class CrearVentaComponent implements OnInit, OnDestroy {
       precioVenta: this.precioVenta,
       totalVenta: this.totalVenta,
       observaciones: this.ventaForm.value.observaciones,
+      fechaVenta: formattedDate,
     };
 
     this.ventasService

@@ -77,6 +77,12 @@ export class VentasService {
       .snapshotChanges();
   }
 
+  obtenerVentas(): Observable<any> {
+    return this.angularFireStore
+      .collection<IVenta>('ventas')
+      .snapshotChanges();
+  }
+
   actualizarProducto(producto: IInventarioResponse): Promise<any> {
     const { id, ...productoMap } = producto;
 
